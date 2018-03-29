@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+<div class="page-header">
+    <h3>您所在的城市为：{% if distinct and city %}{{ distinct+city }}{% else %}未知{% endif %}</h3>
+</div>
+{{ wtf.quick_form(form) }}
+{% endblock %}

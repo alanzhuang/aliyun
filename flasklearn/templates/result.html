@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+<div>
+    <table class="table table-striped">
+        <thread>
+            <th>工作简介</th>
+            <th>工作时间</th>
+            <th>薪资</th>
+            <th>结款方式</th>
+        </thread>
+        {% for result in results %}
+        <tr>
+            <td><a href="{{ result.href }}">{{ result.title }}</a></td>
+            <td>{{ result.work_time}}</td>
+            <td>{{ result.money+result.unit }}</td>
+            <td>{{ result.money_type }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
