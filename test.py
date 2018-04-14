@@ -5,7 +5,6 @@ import pymysql
 
 warnings.filterwarnings("ignore")
 
-
 def runc(url, keyword, db):
     resp = get_resp(url)
     if resp:
