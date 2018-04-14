@@ -56,7 +56,7 @@ def main():
     import redis, os
     redis_host = os.getenv('redis_host', '118.25.19.129')
     redis_port = os.getenv('redis_port', '6379')
-    redis_password = os.getenv('redis_password', '54panjiajia')
+    redis_password = os.getenv('redis_password', '')
     r = redis.Redis(
         host=redis_host,
         port=int(redis_port),
