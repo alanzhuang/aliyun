@@ -54,7 +54,7 @@ def get_resp(url):
 
 def main():
     import redis, os
-    redis_host = os.getenv('redis_host', '118.25.19.129')
+    redis_host = os.getenv('redis_host', '')
     redis_port = os.getenv('redis_port', '6379')
     redis_password = os.getenv('redis_password', '')
     r = redis.Redis(
