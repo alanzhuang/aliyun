@@ -4,3 +4,4 @@ Flask-WTF
 flask-bootstrap
 lxml
 pymysql
+redis
