@@ -73,5 +73,4 @@ def main():
         runc(url, keyword, db)
 
 
-if __name__ == "__main__":
-    main()
+main()
