@@ -5,6 +5,7 @@ import pymysql
 
 warnings.filterwarnings("ignore")
 
+
 def runc(url, keyword, db):
     resp = get_resp(url)
     if resp:
@@ -27,8 +28,8 @@ def runc(url, keyword, db):
                         name = author.xpath('a[@class="entryAuthor"]/text()')[0]
                         email = author.xpath('a[@class="entryAuthor"]/span/span/span[@class="corr-email"]/text()')[0]
                         cursor = db.cursor()
-                        sql = "INSERT INTO zhuang(title,keyword,author,email)VALUES ('%s', '%s', '%s', '%s')" % (
-                        pymysql.escape_string(title), keyword, name, email)
+                        sql = "INSERT INTO zhuang(title,keyword,publication_time,author,email)VALUES ('%s',%s', '%s', '%s', '%s')" % (
+                            pymysql.escape_string(title), keyword, publish_time.strip(), name, email)
                         cursor.execute(sql)
                         db.commit()
 
@@ -48,7 +49,6 @@ def get_resp(url):
     if i == 4:
         print(url + '  失败')
         return None
-
     return resp
 
 
@@ -64,16 +64,13 @@ def main():
         decode_responses=True
     )
 
-    from datetime import datetime
-    db = pymysql.connect("localhost", "root", "muou131", "cashbus", charset='utf8')
-    print(datetime.now())
+    db = pymysql.connect("101.132.178.20", "root", "123456", "TESTDB", charset='utf8')
 
     for i in range(0, 50):
         info = eval(r.srandmember('tandfon_list'))
         url = info['url']
         keyword = info['keyword']
-        runc(url,keyword,db)
-    print(datetime.now())
+        runc(url, keyword, db)
 
 
 if __name__ == "__main__":
