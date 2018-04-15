@@ -3,6 +3,7 @@ from lxml import html
 import warnings
 import pymysql
 import time
+import hashlib
 
 warnings.filterwarnings("ignore")
 
@@ -61,12 +62,18 @@ def get_detail(resp,db,title,keyword,publish_time):
         for author in authorsWithEmail:
             name = author.xpath('a[@class="entryAuthor"]/text()')[0]
             email = author.xpath('a[@class="entryAuthor"]/span/span/span[@class="corr-email"]/text()')[0]
+            raw = name+email+title+keyword+publish_time
+            rawdata = hashlib.md5(raw.encode('utf-8')).hexdigest()
             cursor = db.cursor()
-            sql = "INSERT INTO zhuang(title,keyword,publication_time,author,email)VALUES ('%s','%s', '%s', '%s', '%s')" % (
-                pymysql.escape_string(title), keyword, publish_time.strip(), name, email)
+            sql = "INSERT INTO zhuang(title,keyword,publication_time,author,email,rawdata)VALUES ('%s','%s', '%s', '%s', '%s', '%s')" % (
+                pymysql.escape_string(title), keyword, publish_time.strip(), name, email,rawdata)
             print(sql)
-            cursor.execute(sql)
-            db.commit()
+            try:
+                cursor.execute(sql)
+            except Exception as e:
+                pass
+            else:
+                db.commit()
 
 
 def get_resp(url, r, pp):
