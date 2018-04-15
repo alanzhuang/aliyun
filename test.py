@@ -13,6 +13,7 @@ def runc(url, keyword, db):
         results = tree.xpath('//form[@id="frmSearchResults"]/ol[@class="search-results"]/li')
         for result in results:
             title = result.xpath('article/@data-title')[0]
+            print(title)
             publish_time = result.xpath('article/div[@class="searchentryright"]/div[last()]/span/text()')[0]
             href = result.xpath('article/div[1]/span[1]/a[@class="ref nowrap"]/@href')[0]
             url = 'https://www.tandfonline.com' + href
@@ -45,6 +46,7 @@ def get_resp(url):
             resp = requests.get(url, headers=headers, verify=False, timeout=40).text
         except:
             i += 1
+            print('第'+str(i)+'次部署')
         else:
             break
     if i == 4:
@@ -65,7 +67,7 @@ def main():
         decode_responses=True
     )
 
-    db = pymysql.connect("172.19.79.87", "root", "123456", "TESTDB", charset='utf8')
+    db = pymysql.connect("101.132.178.20", "root", "123456", "TESTDB", charset='utf8')
 
     for i in range(0, 50):
         info = eval(r.srandmember('tandfon_list'))
