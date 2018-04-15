@@ -28,7 +28,7 @@ def runc(url, keyword, db):
                         name = author.xpath('a[@class="entryAuthor"]/text()')[0]
                         email = author.xpath('a[@class="entryAuthor"]/span/span/span[@class="corr-email"]/text()')[0]
                         cursor = db.cursor()
-                        sql = "INSERT INTO zhuang(title,keyword,publication_time,author,email)VALUES ('%s',%s', '%s', '%s', '%s')" % (
+                        sql = "INSERT INTO zhuang(title,keyword,publication_time,author,email)VALUES ('%s','%s', '%s', '%s', '%s')" % (
                             pymysql.escape_string(title), keyword, publish_time.strip(), name, email)
                         cursor.execute(sql)
                         db.commit()
