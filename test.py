@@ -64,7 +64,7 @@ def main():
         decode_responses=True
     )
 
-    db = pymysql.connect("101.132.178.20", "root", "123456", "TESTDB", charset='utf8')
+    db = pymysql.connect("172.19.79.87", "root", "123456", "TESTDB", charset='utf8')
 
     for i in range(0, 50):
         info = eval(r.srandmember('tandfon_list'))
