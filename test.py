@@ -47,16 +47,16 @@ def get_resp(url):
         else:
             break
     if i == 4:
-        print(url + '  失败')
+        print('失败了  '+url)
         return None
     return resp
 
 
 def main():
     import redis, os
-    redis_host = os.getenv('redis_host', '')
+    redis_host = os.getenv('redis_host', '118.25.19.129')
     redis_port = os.getenv('redis_port', '6379')
-    redis_password = os.getenv('redis_password', '')
+    redis_password = os.getenv('redis_password', '54panjiajia')
     r = redis.Redis(
         host=redis_host,
         port=int(redis_port),
@@ -70,6 +70,7 @@ def main():
         info = eval(r.srandmember('tandfon_list'))
         url = info['url']
         keyword = info['keyword']
+        print(url)
         runc(url, keyword, db)
 
 
