@@ -30,6 +30,7 @@ def runc(url, keyword, db):
                         cursor = db.cursor()
                         sql = "INSERT INTO zhuang(title,keyword,publication_time,author,email)VALUES ('%s','%s', '%s', '%s', '%s')" % (
                             pymysql.escape_string(title), keyword, publish_time.strip(), name, email)
+                        print(sql)
                         cursor.execute(sql)
                         db.commit()
 
