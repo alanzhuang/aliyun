@@ -3,3 +3,4 @@ requests
 Flask-WTF
 flask-bootstrap
 lxml
+pymysql
