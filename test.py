@@ -71,7 +71,7 @@ def get_detail(resp,db,title,keyword,publish_time):
             try:
                 cursor.execute(sql)
             except Exception as e:
-                print('插入数据库失败：'+e)
+                pass
             else:
                 db.commit()
 
