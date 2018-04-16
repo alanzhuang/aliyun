@@ -16,7 +16,7 @@ def runc(info, db, r, pp):
             resp,pp = get_resp(url, r, pp)
         except:
             print('获取文章列表失败'+url)
-            # r.sadd("tandfon_list",info)
+            r.sadd("tandfon_list",info)
 
         else:
             if resp:
@@ -35,7 +35,7 @@ def runc(info, db, r, pp):
                         info['publish_time'] = publish_time
 
                         print('获取文章详情失败' + url)
-                        # r.sadd("tandfon_list",info)
+                        r.sadd("tandfon_list",info)
 
                     else:
                         if resp:
@@ -47,7 +47,7 @@ def runc(info, db, r, pp):
             resp, pp = get_resp(url, r, pp)
         except:
             print('获取文章详情失败' + url)
-            # r.sadd("tandfon_list",info)
+            r.sadd("tandfon_list",info)
 
         else:
             if resp:
@@ -145,7 +145,7 @@ def main():
     db = pymysql.connect("101.132.178.20", "root", "123456", "TESTDB", charset='utf8')
     pp = get_proxy(r)
     while True:
-        info_dict = r.srandmember('tandfon_list')
+        info_dict = r.spop('tandfon_list')
         if info_dict:
             info = eval(info_dict)
             runc(info, db, r, pp)
