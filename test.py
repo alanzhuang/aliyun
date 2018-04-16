@@ -16,8 +16,8 @@ def runc(info, db, r, pp):
             resp,pp = get_resp(url, r, pp)
         except:
             print('获取文章列表失败'+url)
-            # r.sadd("tandfon_list",info)
-            pass
+            r.sadd("tandfon_list",info)
+
         else:
             if resp:
                 tree = html.fromstring(resp)
@@ -35,8 +35,8 @@ def runc(info, db, r, pp):
                         info['publish_time'] = publish_time
 
                         print('获取文章详情失败' + url)
-                        # r.sadd("tandfon_list",info)
-                        pass
+                        r.sadd("tandfon_list",info)
+
                     else:
                         if resp:
                             get_detail(resp, db, title, keyword, publish_time)
@@ -47,8 +47,8 @@ def runc(info, db, r, pp):
             resp, pp = get_resp(url, r, pp)
         except:
             print('获取文章详情失败' + url)
-            # r.sadd("tandfon_list",info)
-            pass
+            r.sadd("tandfon_list",info)
+
         else:
             if resp:
                 get_detail(resp, db, title, keyword, publish_time)
