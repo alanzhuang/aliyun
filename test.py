@@ -142,7 +142,8 @@ def main():
         password=redis_password,
         decode_responses=True
     )
-    db = pymysql.connect("101.132.178.20", "root", "123456", "TESTDB", charset='utf8')
+    mysql_password = os.getenv('mysql_password', '')
+    db = pymysql.connect("sh-cdb-gsw750ll.sql.tencentcdb.com",63599, "root", mysql_password, "TESTDB", charset='utf8')
     pp = get_proxy(r)
     while True:
         info_dict = r.spop('tandfon_list')
