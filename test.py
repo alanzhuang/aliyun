@@ -65,7 +65,7 @@ def get_detail(resp,db,title,keyword,publish_time,url):
             raw = name+email+title+keyword+publish_time
             rawdata = hashlib.md5(raw.encode('utf-8')).hexdigest()
             cursor = db.cursor()
-            sql = "INSERT INTO zhuang(title,keyword,publication_time,author,email,rawdata,url)VALUES ('%s',%s','%s', '%s', '%s', '%s', '%s')" % (
+            sql = "INSERT INTO zhuang(title,keyword,publication_time,author,email,rawdata,url)VALUES ('%s','%s','%s', '%s', '%s', '%s', '%s')" % (
                 pymysql.escape_string(title), keyword, publish_time.strip(), name, email,rawdata,url)
             print(sql)
             try:
