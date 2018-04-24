@@ -39,7 +39,7 @@ def runc(info, db, r, pp):
 
                     else:
                         if resp:
-                            get_detail(resp, db, title, keyword, publish_time)
+                            get_detail(resp, db, title, keyword, publish_time,url)
     else:
         title = info['title']
         publish_time = info['publish_time']
@@ -51,9 +51,9 @@ def runc(info, db, r, pp):
 
         else:
             if resp:
-                get_detail(resp, db, title, keyword, publish_time)
+                get_detail(resp, db, title, keyword, publish_time,url)
 
-def get_detail(resp,db,title,keyword,publish_time):
+def get_detail(resp,db,title,keyword,publish_time,url):
     tree = html.fromstring(resp)
     authors_info = tree.xpath('//span[@class="NLM_contrib-group"]')
     if authors_info:
@@ -65,8 +65,8 @@ def get_detail(resp,db,title,keyword,publish_time):
             raw = name+email+title+keyword+publish_time
             rawdata = hashlib.md5(raw.encode('utf-8')).hexdigest()
             cursor = db.cursor()
-            sql = "INSERT INTO zhuang(title,keyword,publication_time,author,email,rawdata)VALUES ('%s','%s', '%s', '%s', '%s', '%s')" % (
-                pymysql.escape_string(title), keyword, publish_time.strip(), name, email,rawdata)
+            sql = "INSERT INTO zhuang(title,keyword,publication_time,author,email,rawdata,url)VALUES ('%s',''%s','%s', '%s', '%s', '%s', '%s')" % (
+                pymysql.escape_string(title), keyword, publish_time.strip(), name, email,rawdata,url)
             print(sql)
             try:
                 cursor.execute(sql)
