@@ -83,14 +83,14 @@ def main():
     import redis, os
     redis_host = os.getenv('redis_host', '118.25.19.129')
     redis_port = os.getenv('redis_port', '6379')
-    redis_password = os.getenv('redis_password', '54panjiajia')
+    redis_password = os.getenv('redis_password', '')
     r = redis.Redis(
         host=redis_host,
         port=int(redis_port),
         password=redis_password,
         decode_responses=True
     )
-    db = pymysql.connect(host="sh-cdb-gsw750ll.sql.tencentcdb.com", port=63599, user="root", password="520liziying", db="TESTDB", charset='utf8')
+    db = pymysql.connect(host="sh-cdb-gsw750ll.sql.tencentcdb.com", port=63599, user="root", password="", db="TESTDB", charset='utf8')
     pp = get_proxy(r)
     while True:
         info_dict = r.spop('tandfon_url')
